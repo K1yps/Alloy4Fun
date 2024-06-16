@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import edu.mit.csail.sdg.alloy4.Err;
 import edu.mit.csail.sdg.alloy4.ErrorWarning;
 import edu.mit.csail.sdg.alloy4.Pos;
-import pt.haslab.specassistant.data.transfer.HintMsg;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_DEFAULT;
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
@@ -15,8 +14,6 @@ public class InstanceMsg {
     public Boolean warning_error = false;
     @JsonInclude(NON_DEFAULT)
     public Boolean alloy_error = false;
-    @JsonInclude(NON_DEFAULT)
-    public Boolean alloy_hint = false;
     @JsonInclude(NON_NULL)
     public String msg;
     @JsonInclude(NON_NULL)
@@ -55,16 +52,6 @@ public class InstanceMsg {
     public static InstanceMsg from(Err err, String msg) {
         InstanceMsg response = from(err);
         response.msg = msg;
-
-        return response;
-    }
-
-    public static Object from(HintMsg hintMsg) {
-        InstanceMsg response = new InstanceMsg();
-
-        response.alloy_hint = true;
-        response.msg = hintMsg.msg;
-        response.mapPos(hintMsg.pos);
 
         return response;
     }

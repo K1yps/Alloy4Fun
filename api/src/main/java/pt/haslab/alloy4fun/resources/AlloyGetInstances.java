@@ -22,15 +22,12 @@ import pt.haslab.alloy4fun.data.transfer.InstanceMsg;
 import pt.haslab.alloy4fun.data.transfer.InstanceResponse;
 import pt.haslab.alloy4fun.data.transfer.InstanceTrace;
 import pt.haslab.alloy4fun.repositories.SessionRepository;
-import pt.haslab.alloyaddons.ParseUtil;
-import pt.haslab.alloyaddons.UncheckedIOException;
-import pt.haslab.specassistant.services.HintGenerator;
+import pt.haslab.alloy4fun.util.ParseUtil;
+import pt.haslab.alloy4fun.util.UncheckedIOException;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
 
 @Path("/getInstances")
 @RequestScoped
@@ -41,9 +38,6 @@ public class AlloyGetInstances {
 
     @Inject
     SessionRepository sessionManager;
-
-    @Inject
-    HintGenerator hintGenerator;
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
@@ -90,9 +84,6 @@ public class AlloyGetInstances {
 
             result = Session.create(request.sessionId, ans, command, world.getAllFunc().makeConstList());
 
-            if (request.parentId != null && command.check && ans.satisfiable())
-                result.hintRequest = CompletableFuture.supplyAsync(() -> hintGenerator.getHint(request.parentId, command.label, world));
-            else result.hintRequest = CompletableFuture.completedFuture(Optional.empty());
             sessionManager.update(result);
         }
 
@@ -120,7 +111,7 @@ public class AlloyGetInstances {
 
         InstanceResponse result = new InstanceResponse();
 
-        if (warnings.size() > 0)
+        if (!warnings.isEmpty())
             result.warning = InstanceMsg.from(warnings.get(0));
 
         result.sessionId = session.id;

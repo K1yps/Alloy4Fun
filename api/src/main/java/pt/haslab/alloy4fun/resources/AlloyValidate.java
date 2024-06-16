@@ -7,8 +7,8 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import pt.haslab.alloyaddons.ParseUtil;
-import pt.haslab.alloyaddons.UncheckedIOException;
+import pt.haslab.alloy4fun.util.ParseUtil;
+import pt.haslab.alloy4fun.util.UncheckedIOException;
 
 import java.util.Map;
 

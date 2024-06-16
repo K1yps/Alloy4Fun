@@ -13,8 +13,8 @@ import org.jboss.logging.Logger;
 import pt.haslab.alloy4fun.data.models.Session;
 import pt.haslab.alloy4fun.data.transfer.InstanceTrace;
 import pt.haslab.alloy4fun.repositories.SessionRepository;
-import pt.haslab.alloyaddons.ParseUtil;
-import pt.haslab.alloyaddons.UncheckedIOException;
+import pt.haslab.alloy4fun.util.ParseUtil;
+import pt.haslab.alloy4fun.util.UncheckedIOException;
 
 import java.util.LinkedHashMap;
 import java.util.List;
